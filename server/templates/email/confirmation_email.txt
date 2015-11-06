@@ -1,0 +1,5 @@
+Hi, {{user.username}}!
+
+Please got to {{confirmation_url}} for activate your account.
+
+Best regards, blogapp team.
