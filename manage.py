@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 
-from flask.ext.migrate import MigrateCommand
+from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.script import Manager, Shell, Server
 from flask.ext.security.script import (
     CreateUserCommand,
@@ -10,9 +10,11 @@ from flask.ext.security.script import (
     ActivateUserCommand,
     DeactivateUserCommand,
 )
+from server.models import db
 
 from run import app
 
+migrate = Migrate(app, db)
 manager = Manager(app)
 
 
