@@ -52,6 +52,13 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+/configuration/local.py
 
 # PyBuilder
 target/
+
+/server/static/bower_components
+.idea/
+/migrations
+/venv
+*.sqlite
