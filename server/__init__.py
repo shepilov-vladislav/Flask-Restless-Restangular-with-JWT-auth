@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
+import os
 
 from flask import Flask, render_template, jsonify
 
@@ -13,7 +14,8 @@ from .extensions import (
 )
 
 
-def create_app(configuration_object='configuration.example'):
+def create_app():
+    configuration_object = os.environ.get('FLASK_CONFIGURATION') or 'configuration.local'
     app = Flask(__name__)
     app.config.from_object(configuration_object)
     register_extensions(app)

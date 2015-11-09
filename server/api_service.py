@@ -1,12 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
+import os
 
 from flask.ext.restless import APIManager
 from flask.ext.restless import ProcessingException
 from flask_jwt import jwt_required, current_user
 
-from config import REST_API_PREFIX
-from .models import User
+configuration_object = os.environ.get('FLASK_CONFIGURATION') or 'configuration.local'
+REST_API_PREFIX = None
+try:
+    exec('from {configuration_object} import REST_API_PREFIX'.format(configuration_object=configuration_object))
+except Exception:
+    pass
+REST_API_PREFIX = REST_API_PREFIX or '/api/v1'
+from .models import User, Protected
 
 
 def is_authorized(user, instance):

@@ -3,6 +3,6 @@ from __future__ import absolute_import
 
 from server import create_app
 
-app = create_app(configuration_object='configuration.local')
+app = create_app()
 if __name__ == '__main__':
     app.run()
