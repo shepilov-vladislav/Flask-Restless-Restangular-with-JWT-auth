@@ -1,0 +1,39 @@
+{
+  "name": "blogapp",
+  "version": "0.0.1",
+  "homepage": "",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/static/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-animate": "~1.4.0",
+    "angular-cookies": "~1.4.0",
+    "angular-touch": "~1.4.0",
+    "angular-sanitize": "~1.4.0",
+    "jquery": "~2.1.4",
+    "restangular": "~1.5.1",
+    "angular-ui-router": "~0.2.15",
+    "angular-bootstrap": "~0.13.0",
+    "toastr": "~2.1.1",
+    "moment": "~2.10.3",
+    "animate.css": "~3.3.0",
+    "angular": "~1.4.0",
+    "satellizer": "~0.12.5",
+    "angular-messages": "~1.4.6",
+    "angular-loading-bar": "~0.8.0",
+    "bootstrap": "~3.3.5",
+  },
+  "resolutions": {
+    "jquery": "~2.1.4",
+    "angular": "~1.4.0"
+  }
+}
