@@ -1,0 +1,45 @@
+<div class='container'>
+    <div class="row">
+        <h1 class="pull-left">List of articles</h1>
+        <div class="pull-right">
+            <div ng-if="article.isAuthenticated()">
+                <button
+                    role='button'
+                    class='btn btn-info'
+                    ng-click="article.openNewArticleDialog()"
+                    data-toggle="modal"
+                    href="#addArticleModal"
+                > Add new article
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    <br/>
+        <div class='col-sm-12'>
+            <div class="panel panel-default" ng-repeat="data in article.articleData">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ data.title }}</h3>
+                    <div class="btn-group btn-group-xs pull-right" role="group" ng-if="article.checkAccess(data.author)">
+                        <button role='button' class='btn btn-info' ng-click="article.openEditArticleDialog(data, $index)"
+                        data-toggle="modal" href="#editArticleModal">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                        <button type="button" class="btn btn-danger" ng-click="article.deleteResource(data, $index)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    {{ data.text }}
+                </div>
+                <div class="panel-footer">
+                    Posted by: `{{ data.author_username }}` at `{{ data.created_at }}`
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>

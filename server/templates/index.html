@@ -2,16 +2,58 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>BLOG</title>
+        <title>blogapp</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" href="{{url_for('static', filename='app/css/bootstrap.sandstone.min.css') }}" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{url_for('static', filename='bower_components/toastr/toastr.css') }}" />
+        <link rel="stylesheet" href="{{url_for('static', filename='bower_components/animate.css/animate.css') }}" />
+        <link rel="stylesheet" href="{{url_for('static', filename='bower_components/angular-loading-bar/src/loading-bar.css') }}" />
+        <link rel="stylesheet" href="{{url_for('static', filename='app/css/main.css') }}" />
     </head>
+
     <body>
-        {% block angularjs_app %}
-        <div ng-app="blog">
-            <blog-navbar></blog-navbar>
+        {% raw %}
+        <div ng-app="blogapp">
+            <blogapp-navbar></blogapp-navbar>
             <ui-view></ui-view>
         </div>
-        {% endblock %}
+        {% endraw %}
+
+        <script src='{{ url_for("static", filename="bower_components/jquery/dist/jquery.min.js") }}'></script>
+        <script src='{{ url_for("static", filename="bower_components/angular/angular.js") }}'></script>
+        <script src='{{ url_for("static", filename="bower_components/angular-animate/angular-animate.js") }}'></script>
+        <script src='{{ url_for("static", filename="bower_components/angular-cookies/angular-cookies.js") }}'></script>
+        <script src='{{ url_for("static", filename="bower_components/angular-touch/angular-touch.js") }}'></script>
+        <script src='{{ url_for("static", filename="bower_components/angular-sanitize/angular-sanitize.js") }}'></script>
+        <script src='{{ url_for("static", filename="bower_components/lodash/lodash.js") }}'></script>
+        <script src='{{ url_for("static", filename="bower_components/restangular/src/restangular.js") }}'></script>
+        <script src='{{ url_for("static", filename="bower_components/angular-ui-router/release/angular-ui-router.js") }}'></script>
+        <script src='{{ url_for("static", filename="bower_components/angular-bootstrap/ui-bootstrap-tpls.js") }}'></script>
+        <script src='{{ url_for("static", filename="bower_components/bootstrap/dist/js/bootstrap.min.js") }}'></script>
+        <script src='{{ url_for("static", filename="bower_components/toastr/toastr.js") }}'></script>
+        <script src='{{ url_for("static", filename="bower_components/moment/moment.js") }}'></script>
+        <script src='{{ url_for("static", filename="bower_components/satellizer/satellizer.js") }}'></script>
+        <script src='{{ url_for("static", filename="bower_components/angular-messages/angular-messages.js") }}'></script>
+        <script src='{{ url_for("static", filename="bower_components/angular-loading-bar/src/loading-bar.js") }}'></script>
+        <script src='{{ url_for("static", filename="app/index.module.js") }}'></script>
+        <script src='{{ url_for("static", filename="app/components/navbar/navbar.directive.js") }}'></script>
+
+        <script src='{{ url_for("static", filename="app/auth/auth.module.js") }}'></script>
+        <script src='{{ url_for("static", filename="app/auth/unique-username.directive.js") }}'></script>
+        <script src='{{ url_for("static", filename="app/auth/unique-email.directive.js") }}'></script>
+        <script src='{{ url_for("static", filename="app/auth/auth.service.js") }}'></script>
+        <script src='{{ url_for("static", filename="app/auth/auth.controller.js") }}'></script>
+
+        <script src='{{ url_for("static", filename="app/article/article.module.js") }}'></script>
+        <script src='{{ url_for("static", filename="app/article/article.service.js") }}'></script>
+        <script src='{{ url_for("static", filename="app/article/article.controller.js") }}'></script>
+
+        <script src='{{ url_for("static", filename="app/main/main.controller.js") }}'></script>
+
+        <script src='{{ url_for("static", filename="app/index.run.js") }}'></script>
+        <script src='{{ url_for("static", filename="app/index.route.js") }}'></script>
+        <script src='{{ url_for("static", filename="app/index.config.js") }}'></script>
     </body>
 </html>

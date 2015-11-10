@@ -1,0 +1,23 @@
+<div class='modal-header'>
+    <h3 >Edit Article</h3>
+</div>
+
+<form name='editArticleForm' class="form-horizontal" ng-submit="vm.updateResource()" novalidate>
+    <div class="form-group" ng-class="{ 'has-error' : editArticleForm.articleTitle.$invalid && editArticleForm.articleTitle.$touched}">
+        <label for="articleTitle" class="col-sm-2 control-label">Title</label>
+        <div class="col-sm-10">
+            <input ng-model="vm.item.title" type="text" class="form-control" id="articleTitle" name="articleTitle" value="{{vm.item.title}}" placeholder="Enter Title" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="articleText" class="col-sm-2 control-label">Text</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" id="articleText" ng-model="vm.item.text" placeholder="Enter Text">{{vm.item.text}}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" ng-disabled="editArticleForm.$invalid" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>

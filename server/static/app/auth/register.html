@@ -1,0 +1,36 @@
+<form name='register_form' role='form' ng-submit='auth.register()' novalidate>
+    <div ng-show="auth.error" class="alert alert-danger">{{auth.errorMessage}}</div>
+    <div ng-show="auth.status" class="alert alert-success">{{auth.statusMessage}}</div>
+    <div class='form-group' ng-class="{ 'has-error' : register_form.email.$invalid && register_form.email.$dirty}">
+        <label class='control-label' for="email">Email</label>
+        <input id="email" type='email' class="form-control mb25"
+        name="email" ng-model='auth.email' placeholder="Email"
+        required
+        unique-email
+        ng-model-options="{ debounce : { 'default' : 500, 'blur': 0 } }">
+        <span ng-messages='register_form.email.$error'>
+        <p class="help-block" ng-message="email">Please enter a valid email address</p>
+        <p class='help-block' ng-message='emailAvailability'>The email address has already been taken</p>
+        </span>
+    </div>
+    <div class='form-group' ng-class="{ 'has-error' : register_form.username.$invalid && register_form.username.$dirty}">
+        <label class='control-label' for="username">Username</label>
+        <input id="username" type='text' class="form-control mb25"
+        name="username" ng-model='auth.username' placeholder="Username"
+        required
+        unique-username
+        ng-model-options="{ debounce : { 'default' : 500, 'blur': 0 } }">
+        <span ng-messages='register_form.username.$error'>
+        <p class="help-block" ng-if="register_form.username.$touched" ng-message='required'>Please enter a valid username</p>
+        <p class='help-block' ng-message='usernameAvailability'>The username has already been taken</p>
+        </span>
+    </div>
+    <div class='form-group' ng-class="{ 'has-error' : register_form.password.$invalid && register_form.password.$touched}">
+        <label class='control-label' for="password">Password</label>
+        <input id="password" type='password' class="form-control mb25"
+        name="password" ng-model='auth.password' placeholder="Password"
+        required>
+        <p class="help-block" ng-show="register_form.password.$touched && register_form.password.$invalid">Please enter a valid password</p>
+    </div>
+    <button ng-disabled="register_form.$invalid" class="btn btn-primary btn-lg btn-block" type="submit">Create Account</button>
+</form>

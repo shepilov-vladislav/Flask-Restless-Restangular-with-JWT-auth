@@ -1,0 +1,24 @@
+<nav class="navbar navbar-default blog-masthead" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" ui-sref="home">blogapp</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li ng-class="{ active: isActive('/')}"><a ui-sref="home">Home</a></li>
+            <li ng-class="{ active: isActive('/article')}"><a ui-sref="article">Articles</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li ng-if="!vm.isAuthenticated()">
+                <a ui-sref="auth.login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login/Register</a>
+            </li>
+            <li ng-if="vm.isAuthenticated()" dropdown is-open="status.isopen">
+                <a id="single-button" type="button" dropdown-toggle ng-disabled="disabled">
+                    {{currentUser.username}} <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+                    <li><a ui-sref="logout">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

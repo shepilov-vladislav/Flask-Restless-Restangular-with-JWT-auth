@@ -1,0 +1,24 @@
+<form name='login_form' role='form' ng-submit='auth.login()' novalidate>
+    <div ng-show="auth.error" class="alert alert-danger">{{auth.errorMessage}}</div>
+    <div ng-show="auth.status" class="alert alert-success">{{auth.statusMessage}}</div>
+    <div class='form-group' ng-class="{ 'has-error' : login_form.email.$invalid && login_form.email.$touched}">
+        <label class='control-label' for="email">Email</label>
+        <input id ="email" type='email' class="form-control mb25"
+        name="email" ng-model='auth.email' placeholder="Email"
+        required>
+        <p class="help-block" ng-show="login_form.email.$touched && login_form.email.$invalid">Please enter a valid email address</p>
+    </div>
+    <div class='form-group' ng-class="{ 'has-error' : login_form.password.$invalid && login_form.password.$touched}">
+        <label class='control-label' for="password">Password</label>
+        <input id="password" type='password' class="form-control mb25"
+        name="password" ng-model='auth.password' placeholder="Password"
+        required>
+        <p class="help-block" ng-show="login_form.password.$touched && login_form.password.$invalid">Please enter a valid password</p>
+    </div>
+    <div class="checkbox">
+        <label class="checkbox control-label">
+        <input type="checkbox" value="remember-me" ng-model="auth.remember_me" ng-change="auth.logchange()">Remember me
+        </label>
+    </div>
+    <button ng-disabled="login_form.$invalid" class="btn btn-primary btn-lg btn-block" type="submit">Sign in</button>
+</form>
