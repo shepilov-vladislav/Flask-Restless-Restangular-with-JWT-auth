@@ -5,6 +5,7 @@ from flask.ext.security import UserMixin, RoleMixin
 from flask.ext.sqlalchemy import SQLAlchemy
 from savalidation import ValidationMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 from .errors_handlers import CheckError
 
@@ -68,3 +69,25 @@ class User(db.Model, UserMixin, ValidationMixin):
         except KeyError as key_err:
             raise CheckError('Invalid password: missing ' + key_err.args[0])
         return self
+
+
+class Article(db.Model):
+    __tablename__ = 'article'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120), nullable=False)
+    slug = db.Column(db.String(120))
+    text = db.Column(db.Text, nullable=False)
+    author = db.Column(db.Integer, db.ForeignKey('user.id'))
+    created_at = db.Column(db.DateTime, default=db.func.now())
+
+    def __init__(self, title, text, author):
+        self.title = title
+        self.text = text
+        self.author = author
+        self.created_at = datetime.utcnow()
+
+    def author_username(self):
+        return unicode(User.query.filter_by(id=self.author).first().username)
+
+    def __repr__(self):
+        return '<Article %r>' % self.title

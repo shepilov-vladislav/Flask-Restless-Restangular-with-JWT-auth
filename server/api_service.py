@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
+
 import os
 
 from flask.ext.restless import APIManager
@@ -13,7 +14,7 @@ try:
 except Exception:
     pass
 REST_API_PREFIX = REST_API_PREFIX or '/api/v1'
-from .models import User, Protected
+from .models import User, Article
 
 
 def is_authorized(user, instance):
@@ -39,6 +40,10 @@ def auth_admin_func(instance_id=None, **kwargs):
 def auth_func(instance_id=None, **kwargs):
     pass
 
+
+def auth_without_jwt(instance_id=None, **kwargs):
+    pass
+
 api_manager = APIManager()
 
 api_manager.create_api(
@@ -47,4 +52,14 @@ api_manager.create_api(
     url_prefix=REST_API_PREFIX,
     preprocessors=dict(GET_SINGLE=[auth_user_func], GET_MANY=[auth_admin_func]),
     collection_name='user',
-    include_columns=['id', 'username'])
+    include_columns=['id', 'username', 'roles'])
+
+api_manager.create_api(
+    Article,
+    # results_per_page=5,
+    methods=['GET', 'POST', 'DELETE', 'PUT'],
+    url_prefix=REST_API_PREFIX,
+    preprocessors=dict(GET_SINGLE=[auth_without_jwt], GET_MANY=[auth_without_jwt]),
+    collection_name='article',
+    include_columns=['id', 'title', 'text', 'author', 'created_at'],
+    include_methods=['author_username'])
