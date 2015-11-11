@@ -1,10 +1,9 @@
-# Flask-Restless-Restangular-with-JWT-auth
-example blog application based on Flask-Restless on backend and Restangular on frontend
-
-
 [![Software License][ico-license]](LICENSE.md)
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Code Health][ico-code-health]][link-code-health]
+
+# Flask-Restless-Restangular-with-JWT-auth
+example blog application based on Flask-Restless on backend and Restangular on frontend
 
 # Quick Start
 
