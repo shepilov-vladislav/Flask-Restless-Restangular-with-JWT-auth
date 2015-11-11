@@ -43,13 +43,11 @@ def auth_admin_func(instance_id=None, **kwargs):
 def auth_func(instance_id=None, **kwargs):
     del instance_id
     del kwargs
-    pass
 
 
 def auth_without_jwt(instance_id=None, **kwargs):
     del instance_id
     del kwargs
-    pass
 
 api_manager = APIManager()
 
