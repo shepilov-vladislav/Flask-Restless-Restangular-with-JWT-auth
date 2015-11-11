@@ -4,7 +4,7 @@ from __future__ import absolute_import
 from flask.ext.security import UserMixin, RoleMixin
 from flask.ext.sqlalchemy import SQLAlchemy
 from savalidation import ValidationMixin
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask.ext.security.utils import encrypt_password, verify_password
 from datetime import datetime
 
 from .errors_handlers import CheckError
@@ -36,10 +36,10 @@ class User(db.Model, UserMixin, ValidationMixin):
                             backref=db.backref('users', lazy='dynamic'))
 
     def set_password(self, password):
-        self.password = generate_password_hash(password)
+        self.password = encrypt_password(password)
 
     def check_password(self, password):
-        return check_password_hash(self.password, password)
+        return verify_password(password, self.password)
 
     def check_mail_for_uniqueness(self, new_email):
         if self.query.filter_by(email=new_email).first() is None:
