@@ -47,6 +47,7 @@ def register_blueprints(app):
 
 def register_errorhandlers(app):
     def render_error(error):
+        del error
         return jsonify({
             "error": "Unauthorized",
             "description": "Please check your email to activate your account.",

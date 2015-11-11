@@ -27,21 +27,28 @@ def is_authorized(user, instance):
 
 @jwt_required()
 def auth_user_func(instance_id=None, **kwargs):
+    del kwargs
     if not is_authorized(current_user, instance_id):
         raise ProcessingException(description='Not Authorized', code=401)
 
 
 @jwt_required()
 def auth_admin_func(instance_id=None, **kwargs):
+    del instance_id
+    del kwargs
     raise ProcessingException(description='Only admins can access this view', code=401)
 
 
 @jwt_required()
 def auth_func(instance_id=None, **kwargs):
+    del instance_id
+    del kwargs
     pass
 
 
 def auth_without_jwt(instance_id=None, **kwargs):
+    del instance_id
+    del kwargs
     pass
 
 api_manager = APIManager()
