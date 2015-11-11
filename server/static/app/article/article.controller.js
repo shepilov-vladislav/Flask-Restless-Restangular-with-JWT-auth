@@ -97,6 +97,10 @@
             });
         };
 
+        vm.close = function () {
+            $modalInstance.dismiss('cancel');
+        };
+
     }  // <-- EditModalController
 
 
@@ -119,6 +123,10 @@
             vm.text = '';
 
             $modalInstance.close();
+        };
+
+        vm.close = function () {
+            $modalInstance.dismiss('cancel');
         };
 
     } // <-- NewModalController
