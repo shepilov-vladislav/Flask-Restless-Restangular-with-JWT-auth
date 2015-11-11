@@ -26,7 +26,7 @@ MAIL_PASSWORD = os.environ['GMAIL_PASSWORD']
 SECRET_KEY = os.environ['SECRET_KEY'] or 'secret_secret_secret'
 SECURITY_REGISTERABLE = True
 SECURITY_REGISTER_URL = '/auth/register'
-SECURITY_PASSWORD_HASH = 'sha512_crypt'
+SECURITY_PASSWORD_HASH = os.environ['SECURITY_PASSWORD_HASH'] or 'hash_hash_hash'
 SECURITY_PASSWORD_SALT = os.environ['SECURITY_PASSWORD_SALT'] or 'salt_salt_salt'
 JWT_EXPIRATION_DELTA = timedelta(days=10)
 
