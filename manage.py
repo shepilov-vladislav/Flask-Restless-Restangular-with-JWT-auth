@@ -5,6 +5,7 @@ from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.script import Manager, Shell, Server
 from flask.ext.security.script import (
     CreateUserCommand,
+    CreateRoleCommand,
     AddRoleCommand,
     RemoveRoleCommand,
     ActivateUserCommand,
@@ -28,6 +29,7 @@ manager.add_command('shell', Shell(make_context=make_context))
 manager.add_command('db', MigrateCommand)
 
 manager.add_command('create_user', CreateUserCommand())
+manager.add_command('create_role', CreateRoleCommand())
 manager.add_command('add_role', AddRoleCommand())
 manager.add_command('remove_role', RemoveRoleCommand())
 manager.add_command('deactivate_user', DeactivateUserCommand())
