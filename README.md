@@ -24,8 +24,8 @@ example blog application based on Flask-Restless on backend and Restangular on f
     - enjoy!
 
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-code-quality]: https://scrutinizer-ci.com/g/shepilov-vladislav/Flask-Restless-Restangular-with-JWT-auth/badges/quality-score.png?b=master
-[ico-code-health]: https://landscape.io/github/shepilov-vladislav/Flask-Restless-Restangular-with-JWT-auth/master/landscape.svg?style=flat
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/shepilov-vladislav/Flask-Restless-Restangular-with-JWT-auth.svg?style=flat-square
+[ico-code-health]: https://landscape.io/github/shepilov-vladislav/Flask-Restless-Restangular-with-JWT-auth/master/landscape.svg?style=flat-square
 
 [link-code-quality]: https://scrutinizer-ci.com/g/shepilov-vladislav/Flask-Restless-Restangular-with-JWT-auth
 [link-code-health]: https://landscape.io/github/shepilov-vladislav/Flask-Restless-Restangular-with-JWT-auth/master
