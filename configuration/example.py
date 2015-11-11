@@ -18,16 +18,16 @@ MAIL_SERVER = 'smtp.googlemail.com'
 MAIL_PORT = 465
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
-MAIL_USERNAME = os.environ['GMAIL_USERNAME']
-MAIL_PASSWORD = os.environ['GMAIL_PASSWORD']
+MAIL_USERNAME = os.getenv('GMAIL_USERNAME')
+MAIL_PASSWORD = os.getenv('GMAIL_PASSWORD')
 
 
 # SECURITY
-SECRET_KEY = os.environ['SECRET_KEY'] or 'secret_secret_secret'
+SECRET_KEY = os.getenv('SECRET_KEY') or 'secret_secret_secret'
 SECURITY_REGISTERABLE = True
 SECURITY_REGISTER_URL = '/auth/register'
-SECURITY_PASSWORD_HASH = os.environ['SECURITY_PASSWORD_HASH'] or 'hash_hash_hash'
-SECURITY_PASSWORD_SALT = os.environ['SECURITY_PASSWORD_SALT'] or 'salt_salt_salt'
+SECURITY_PASSWORD_HASH = os.getenv('SECURITY_PASSWORD_HASH') or 'sha512_crypt'
+SECURITY_PASSWORD_SALT = os.getenv('SECURITY_PASSWORD_SALT') or 'salt_salt_salt'
 JWT_EXPIRATION_DELTA = timedelta(days=10)
 
 # REST-API
