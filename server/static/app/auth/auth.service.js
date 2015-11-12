@@ -6,8 +6,8 @@
         .module('blogapp.auth')
         .factory('AuthService', AuthService);
 
-    AuthService.$inject = ['$auth', '$state', '$http', 'API', '$rootScope', '$q'];
-    function AuthService($auth, $state, $http, API, $rootScope, $q) {
+    AuthService.$inject = ['$auth', '$state', '$http', 'API', '$rootScope', '$q', '$window'];
+    function AuthService($auth, $state, $http, API, $rootScope, $q, $window) {
         var Auth = {
             register: register,
             login: login,
@@ -39,11 +39,13 @@
               var userString = JSON.stringify(userResponse.data);
               if (Auth.storageMethod == "localStorage") {
                   localStorage.setItem("user", userString);
+                  localStorage.setItem("authenticated", true);
+                  localStorage.setItem("StorageMethod", 'localStorage');
               } else {
-                  sessionStorage.setItem("user", userString);
+                  $window.sessionStorage.setItem("user", userString);
+                  $window.sessionStorage.setItem("authenticated", true);
+                  $window.sessionStorage.setItem("StorageMethod", 'sessionStorage');
               }
-              $rootScope.authenticated = true;
-              $rootScope.currentUser = userResponse.data;
             });
         }
 
@@ -68,30 +70,31 @@
 
         function logout() {
             $auth.logout().then(function() {
-                localStorage.removeItem('user');
-                $rootScope.authenticated = false;
-                $rootScope.currentUser = null;
+                clearStorage();
             });
         }
 
         function getStorageMethod() {
-            return Auth.storageMethod;
+            return localStorage["StorageMethod"] || $window.sessionStorage["StorageMethod"] || null;
         }
 
         function getCurrentStorageMethod(){
-            var storage_method = null;
-            if (Auth.storageMethod === 'localStorage') {
-                storage_method = localStorage;
+            var result = null;
+            var storageMethod = getStorageMethod()
+            if (storageMethod === 'localStorage') {
+                result = localStorage;
             }
-            else if (Auth.storageMethod === 'sessionStorage') {
-                storage_method = sessionStorage;
+            else if (storageMethod === 'sessionStorage') {
+                result = $window.sessionStorage;
             }
-            else { throw "Unknown storageMethod!"; }
-            return storage_method;
+            else {
+                result = null;
+            }
+            return result;
         }
 
         function isAuthenticated() {
-            return $rootScope.authenticated;
+            return localStorage["authenticated"] || $window.sessionStorage["authenticated"] || false;
         }
 
         function getUser() {
@@ -112,6 +115,11 @@
                 result = undefined;
             }
             return result;
+        }
+
+        function clearStorage() {
+            var storage_method = getCurrentStorageMethod();
+            storage_method.clear();
         }
 
     }  // <-- AuthService
