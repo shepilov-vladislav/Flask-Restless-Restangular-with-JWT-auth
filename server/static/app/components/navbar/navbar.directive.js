@@ -21,6 +21,7 @@
         function NavbarController($auth, AuthService, $rootScope) {
             var vm = this;
             vm.isAuthenticated = AuthService.isAuthenticated;
+            vm.getUser = AuthService.getUser;
         }
 
     }  // <-- blogappNavbar

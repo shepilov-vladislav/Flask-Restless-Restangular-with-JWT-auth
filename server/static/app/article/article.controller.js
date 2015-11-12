@@ -18,6 +18,7 @@
         vm.openNewArticleDialog = openNewArticleDialog;
         vm.checkAccess = checkAccess;
         vm.isAuthenticated = AuthService.isAuthenticated;
+        vm.getUID = AuthService.getUID;
 
         vm.ArticleService.getAllArticleData().then(function(response) {
             vm.articleData = response;
@@ -75,7 +76,7 @@
                 controller: ['$modalInstance', 'articleData', 'ArticleService', 'Restangular', '$state', 'create_uid', NewModalController],
                 controllerAs: 'vm',
                 resolve: {
-                    create_uid: function() { return angular.fromJson(localStorage.getItem("user"))["id"]; },
+                    create_uid: function() { return AuthService.getUID(); },
                     articleData: function() { return vm.articleData; },
                 }
             });

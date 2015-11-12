@@ -13,7 +13,7 @@
             </li>
             <li ng-if="vm.isAuthenticated()" dropdown is-open="status.isopen">
                 <a id="single-button" type="button" dropdown-toggle ng-disabled="disabled">
-                    {{currentUser.username}} <span class="caret"></span>
+                    {{vm.getUser().username}} <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
                     <li><a ui-sref="logout">Logout</a></li>
