@@ -90,4 +90,4 @@ class Article(db.Model):
         return unicode(User.query.filter_by(id=self.author).first().username)
 
     def __repr__(self):
-        return '<Article %r>' % self.title
+        return '<Article {}>'.format(self.title)

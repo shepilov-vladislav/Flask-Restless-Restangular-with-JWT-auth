@@ -2,17 +2,20 @@
 from __future__ import absolute_import
 
 import os
+import logging
 
 from flask.ext.restless import APIManager
 from flask.ext.restless import ProcessingException
 from flask_jwt import jwt_required, current_identity
 
+logger = logging.getLogger(__name__)
+
 configuration_object = os.environ.get('FLASK_CONFIGURATION') or 'configuration.local'
 REST_API_PREFIX = None
 try:
     exec('from {configuration_object} import REST_API_PREFIX'.format(configuration_object=configuration_object))
-except Exception:
-    pass
+except Exception as e:
+    logger.debug('Couldn\'t load REST_API_PREFIX from `{0}`!\nDetails: {1}'.format(configuration_object, e))
 REST_API_PREFIX = REST_API_PREFIX or '/api/v1'
 from .models import User, Article
 

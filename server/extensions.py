@@ -45,15 +45,12 @@ def custom_identity_handler(payload):
 
 @jwt.auth_response_handler
 def custom_auth_response_callback(access_token, identity):
+    del identity
     return jsonify({'token': access_token.decode('utf-8')})
-    # return jsonify({'token': payload})
 
 
 @jwt.jwt_payload_handler
 def custom_jwt_payload_handler(identity):
-    # return {
-    #     'user_id': user.id,
-    # }
     iat = datetime.utcnow()
     exp = iat + current_app.config.get('JWT_EXPIRATION_DELTA')
     nbf = iat + current_app.config.get('JWT_NOT_BEFORE_DELTA')
