@@ -21,7 +21,6 @@ MAIL_USE_SSL = True
 MAIL_USERNAME = os.getenv('GMAIL_USERNAME')
 MAIL_PASSWORD = os.getenv('GMAIL_PASSWORD')
 
-
 # SECURITY
 SECRET_KEY = os.getenv('SECRET_KEY') or 'secret_secret_secret'
 SECURITY_REGISTERABLE = True
@@ -32,3 +31,7 @@ JWT_EXPIRATION_DELTA = timedelta(days=10)
 
 # REST-API
 REST_API_PREFIX = '/api/v1'
+JWT_AUTH_HEADER_PREFIX = 'bearer'
+
+
+SQLALCHEMY_TRACK_MODIFICATIONS = False
