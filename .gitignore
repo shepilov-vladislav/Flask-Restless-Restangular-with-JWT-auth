@@ -62,3 +62,6 @@ target/
 /migrations
 /venv
 *.sqlite
+
+src/
+VENV_PYTHON_NAME
