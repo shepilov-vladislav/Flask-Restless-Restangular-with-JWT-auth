@@ -5,9 +5,9 @@
         .module('blogapp.article')
         .controller('ArticleController', ArticleController);
 
-    ArticleController.$inject = ['ArticleService', 'Restangular', '$modal', 'AuthService'];
+    ArticleController.$inject = ['ArticleService', 'Restangular', '$uibModal', 'AuthService'];
 
-    function ArticleController(ArticleService, Restangular, $modal, AuthService) {
+    function ArticleController(ArticleService, Restangular, $uibModal, AuthService) {
         var vm = this;
 
         vm.articleData = null;
@@ -32,10 +32,10 @@
         });
 
         function openEditArticleDialog(item, idx) {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'static/app/article/edit-article-resource.html',
-                controller: ['$modalInstance', 'item', 'articleData', 'ArticleService', 'Restangular', '$state', 'idx', EditModalController],
+                controller: ['$uibModalInstance', 'item', 'articleData', 'ArticleService', 'Restangular', '$state', 'idx', EditModalController],
                 controllerAs: 'vm',
                 resolve: {
                     idx: function() { return idx; },
@@ -70,10 +70,10 @@
         }
 
         function openNewArticleDialog() {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'static/app/article/new-article-resource.html',
-                controller: ['$modalInstance', 'articleData', 'ArticleService', 'Restangular', '$state', 'create_uid', NewModalController],
+                controller: ['$uibModalInstance', 'articleData', 'ArticleService', 'Restangular', '$state', 'create_uid', NewModalController],
                 controllerAs: 'vm',
                 resolve: {
                     create_uid: function() { return AuthService.getUID(); },
@@ -84,8 +84,8 @@
 
   }  // <-- ArticleController
 
-    EditModalController.$inject = ['$modalInstance', 'item', 'articleData', 'ArticleService', 'Restangular', '$state', 'idx']
-    function EditModalController($modalInstance, item, articleData, ArticleService, Restangular, $state, idx) {
+    EditModalController.$inject = ['$uibModalInstance', 'item', 'articleData', 'ArticleService', 'Restangular', '$state', 'idx']
+    function EditModalController($uibModalInstance, item, articleData, ArticleService, Restangular, $state, idx) {
         var vm = this;
         var original = item;
         vm.item = Restangular.copy(original);
@@ -94,19 +94,19 @@
         vm.updateResource = function() {
             vm.item.put().then(function(updatedItem) {
                 vm.articleData[idx] = updatedItem;
-                $modalInstance.close();
+                $uibModalInstance.close();
             });
         };
 
         vm.close = function () {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
 
     }  // <-- EditModalController
 
 
-    NewModalController.$inject = ['$modalInstance', 'articleData', 'ArticleService', 'Restangular', '$state', 'create_uid']
-    function NewModalController($modalInstance, articleData, ArticleService, Restangular, $state, create_uid) {
+    NewModalController.$inject = ['$uibModalInstance', 'articleData', 'ArticleService', 'Restangular', '$state', 'create_uid']
+    function NewModalController($uibModalInstance, articleData, ArticleService, Restangular, $state, create_uid) {
         var vm = this;
         vm.articleData = articleData;
 
@@ -123,11 +123,11 @@
             vm.title = '';
             vm.text = '';
 
-            $modalInstance.close();
+            $uibModalInstance.close();
         };
 
         vm.close = function () {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
 
     } // <-- NewModalController
