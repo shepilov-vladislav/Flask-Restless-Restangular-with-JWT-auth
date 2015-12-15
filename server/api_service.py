@@ -5,7 +5,7 @@ import os
 
 from flask.ext.restless import APIManager
 from flask.ext.restless import ProcessingException
-from flask_jwt import jwt_required, current_user
+from flask_jwt import jwt_required, current_identity
 
 configuration_object = os.environ.get('FLASK_CONFIGURATION') or 'configuration.local'
 REST_API_PREFIX = None
@@ -28,7 +28,7 @@ def is_authorized(user, instance):
 @jwt_required()
 def auth_user_func(instance_id=None, **kwargs):
     del kwargs
-    if not is_authorized(current_user, instance_id):
+    if not is_authorized(current_identity, instance_id):
         raise ProcessingException(description='Not Authorized', code=401)
 
 

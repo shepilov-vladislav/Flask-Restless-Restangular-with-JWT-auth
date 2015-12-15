@@ -21,12 +21,13 @@ security = Security(datastore=datastore)
 
 
 from flask_jwt import JWT
-from flask import abort
+from flask import abort, jsonify, current_app
+from datetime import datetime
 jwt = JWT()
 
 
 @jwt.authentication_handler
-def authenticate(username, password):
+def custom_authentication_handler(username, password):
     user = datastore.find_user(email=username)
     if user is not None:
         if not user.is_active():
@@ -36,7 +37,25 @@ def authenticate(username, password):
     return None
 
 
-@jwt.user_handler
-def load_user(payload):
+@jwt.identity_handler
+def custom_identity_handler(payload):
     user = datastore.find_user(id=payload['user_id'])
     return user
+
+
+@jwt.auth_response_handler
+def custom_auth_response_callback(access_token, identity):
+    return jsonify({'token': access_token.decode('utf-8')})
+    # return jsonify({'token': payload})
+
+
+@jwt.jwt_payload_handler
+def custom_jwt_payload_handler(identity):
+    # return {
+    #     'user_id': user.id,
+    # }
+    iat = datetime.utcnow()
+    exp = iat + current_app.config.get('JWT_EXPIRATION_DELTA')
+    nbf = iat + current_app.config.get('JWT_NOT_BEFORE_DELTA')
+    identity = getattr(identity, 'id') or identity['id']
+    return {'exp': exp, 'iat': iat, 'nbf': nbf, 'identity': identity, 'user_id': identity}
