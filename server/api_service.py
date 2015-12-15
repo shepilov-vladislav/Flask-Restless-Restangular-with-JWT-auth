@@ -15,7 +15,7 @@ REST_API_PREFIX = None
 try:
     exec('from {configuration_object} import REST_API_PREFIX'.format(configuration_object=configuration_object))
 except Exception as e:
-    logger.debug('Couldn\'t load REST_API_PREFIX from `%s`!\nDetails: %s' % (configuration_object, e))
+    logger.debug('Couldn\'t load REST_API_PREFIX from `%s`!\nDetails: %s', (configuration_object, e))
 REST_API_PREFIX = REST_API_PREFIX or '/api/v1'
 from .models import User, Article
 
