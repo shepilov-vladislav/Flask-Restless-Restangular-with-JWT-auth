@@ -21,11 +21,7 @@ from .models import User, Article
 
 
 def is_authorized(user, instance):
-    if int(user.id) == int(instance):
-        result = True
-    else:
-        result = False
-    return result
+    return int(user.id) == int(instance)
 
 
 @jwt_required()
