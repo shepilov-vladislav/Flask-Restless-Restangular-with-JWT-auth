@@ -30,7 +30,7 @@ jwt = JWT()
 def custom_authentication_handler(username, password):
     user = datastore.find_user(email=username)
     if user is not None:
-        if not user.is_active():
+        if not user.is_active:
             abort(401)
         if username == user.email and user.check_password(password):
             return user
